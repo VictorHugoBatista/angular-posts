@@ -8,9 +8,10 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  getPosts(pageNumber: number = 1): Observable<Object> {
+  getPosts(search: string = '', pageNumber: number = 1): Observable<Object> {
     return this.http.get(this.baseUrl + '/posts', {
       params: {
+        'q': search,
         '_page': pageNumber.toString(),
       },
     });
