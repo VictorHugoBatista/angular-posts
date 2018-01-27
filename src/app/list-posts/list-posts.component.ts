@@ -10,7 +10,7 @@ export class ListPostsComponent implements OnInit {
 
   private posts;
   private searchText = '';
-  private pageNumber = 0;
+  private pageNumber: number;
 
   constructor(private postsService: PostsService) {}
 
@@ -19,12 +19,14 @@ export class ListPostsComponent implements OnInit {
   }
 
   changeSearchField(searchText) {
-    this.pageNumber = 0;
     this.searchText = searchText;
     this.updateList(true);
   }
 
   updateList(overwriteList: boolean = false) {
+    if (overwriteList) {
+      this.pageNumber = 0;
+    }
     this.postsService.getPosts(this.searchText, ++this.pageNumber)
       .subscribe(data => {
         if (overwriteList) {
