@@ -4,6 +4,7 @@ import { ListPostsComponent } from './list-posts/list-posts.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 
 const routes: Routes = [
+  { path: '', component: ListPostsComponent },
   { path: 'posts', component: ListPostsComponent },
   { path: 'post', component: SinglePostComponent },
 ];
