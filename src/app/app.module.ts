@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { PostsService } from './posts.service';
+
 import { AppComponent } from './app.component';
 import { ListPostsComponent } from './list-posts/list-posts.component';
 import { SinglePostComponent } from './single-post/single-post.component';
@@ -18,7 +20,7 @@ import { SinglePostComponent } from './single-post/single-post.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
