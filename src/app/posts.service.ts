@@ -7,7 +7,11 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  getPosts() {
-    return this.http.get(this.baseUrl + '/posts');
+  getPosts(pageNumber: number = 1) {
+    return this.http.get(this.baseUrl + '/posts', {
+      params: {
+        '_page': pageNumber.toString(),
+      },
+    });
   }
 }
