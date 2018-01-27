@@ -9,12 +9,26 @@ import { PostsService } from '../posts.service';
 export class ListPostsComponent implements OnInit {
 
   private posts;
+  private pageNumber = 0;
 
   constructor(private postsService: PostsService) {}
 
   ngOnInit() {
-    this.postsService.getPosts()
-      .subscribe(data => this.posts = data);
+    this.updateList(true);
   }
 
+  updateList(overwriteList: boolean = false) {
+    this.postsService.getPosts(++this.pageNumber)
+      .subscribe(data => {
+        if (overwriteList) {
+          this.posts = data;
+          return;
+        }
+        for (const item in data) {
+          if ('undefined' !== typeof data[item]) {
+            this.posts.push(data[item]);
+          }
+        }
+      });
+  }
 }

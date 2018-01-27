@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PostsService {
@@ -7,7 +8,11 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  getPosts() {
-    return this.http.get(this.baseUrl + '/posts');
+  getPosts(pageNumber: number = 1): Observable<Object> {
+    return this.http.get(this.baseUrl + '/posts', {
+      params: {
+        '_page': pageNumber.toString(),
+      },
+    });
   }
 }
