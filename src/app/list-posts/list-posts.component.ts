@@ -9,16 +9,26 @@ import { PostsService } from '../posts.service';
 export class ListPostsComponent implements OnInit {
 
   private posts;
-  private pageNumber = 0;
+  private _searchText = '';
+  private pageNumber: number;
 
   constructor(private postsService: PostsService) {}
+
+  set searchText(searchText: string) {
+    this._searchText = searchText;
+    this.updateList(true);
+  }
 
   ngOnInit() {
     this.updateList(true);
   }
 
   updateList(overwriteList: boolean = false) {
-    this.postsService.getPosts(++this.pageNumber)
+    if (overwriteList) {
+      this.pageNumber = 0;
+    }
+    this.postsService
+      .getPosts(this._searchText, ++this.pageNumber)
       .subscribe(data => {
         if (overwriteList) {
           this.posts = data;
