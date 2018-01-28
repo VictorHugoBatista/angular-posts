@@ -9,17 +9,12 @@ import { PostsService } from '../posts.service';
 export class ListPostsComponent implements OnInit {
 
   private posts;
-  private searchText = '';
+  searchText = '';
   private pageNumber: number;
 
   constructor(private postsService: PostsService) {}
 
   ngOnInit() {
-    this.updateList(true);
-  }
-
-  changeSearchField(searchText) {
-    this.searchText = searchText;
     this.updateList(true);
   }
 
